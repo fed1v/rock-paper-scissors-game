@@ -3,10 +3,10 @@ public class Rules {
 
     public Rules(String[] moves) {
         rules = new int[moves.length][moves.length];
-        generateTable();
+        generateRules();
     }
 
-    public void generateTable() {
+    public void generateRules() {
         int m = rules.length;
         int n = rules[0].length;
 
@@ -19,15 +19,6 @@ public class Rules {
                 if (j > i && j - i > mid) rules[i][j] = 1;
                 if (i != j && rules[i][j] == 0) rules[i][j] = -1;
             }
-        }
-    }
-
-    public void showTable() {
-        for(int i = 0; i < rules.length; i++){
-            for(int j = 0; j < rules[0].length; j++){
-                System.out.printf("%3d", rules[i][j]);
-            }
-            System.out.println();
         }
     }
 }

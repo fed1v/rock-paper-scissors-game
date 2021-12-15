@@ -53,7 +53,7 @@ public class Main {
             return false;
         }
 
-        // If there are same turns
+        // If there are same moves
         for (int i = 0; i < moves.length; i++) {
             for (int j = i + 1; j < moves.length; j++) {
                 if (i != j && moves[i].equals(moves[j])) {
@@ -135,7 +135,7 @@ public class Main {
 
     private void userMakesMove(){
         System.out.print("Please, enter your move: ");
-        String move = "";
+        String move;
         Scanner scanner = new Scanner(System.in);
         move = scanner.nextLine();
 
