@@ -3,20 +3,24 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Main {
-    static String[] moves;
-    static String error;
-    static boolean moveIsMade;
-    static boolean exit;
-    static int userMove;
-    static int computerMove;
-    static Rules rules;
-    static int resultOfGame = -123;
-    static String key;
-    static String HMAC;
+    String[] moves;
+    String error;
+    boolean moveIsMade;
+    boolean exit;
+    int userMove;
+    int computerMove;
+    Rules rules;
+    int resultOfGame = -123;
+    String key;
+    String HMAC;
     static final String hmacSHA256Algorithm = "HmacSHA256";
-    static Table table;
+    Table table;
 
     public static void main(String[] args) {
+        new Main().go(args);
+    }
+
+    public void go(String[] args){
         moves = args;
         table = new Table(moves);
 
@@ -34,18 +38,18 @@ public class Main {
         } while(!exit);
     }
 
-    private static boolean verifyInput() {
+    private boolean verifyInput() {
         // If number < 3
         if (moves.length < 3) {
-            error = "You entered " + moves.length + " turns, " +
-                    "but number of turns must be greater than or equal to 3 (for example, 3 or 8).";
+            error = "You entered " + moves.length + " moves, " +
+                    "but number of moves must be greater than or equal to 3 (for example, 3 or 8).";
             return false;
         }
 
         // If number is not odd
         if (moves.length % 2 == 0) {
-            error = "You entered an even number of turns (" + moves.length + ")" +
-                    ", but number of turns must be odd (for example, 5 or 9)";
+            error = "You entered an even number of moves (" + moves.length + ")" +
+                    ", but number of moves must be odd (for example, 5 or 9).";
             return false;
         }
 
@@ -53,7 +57,7 @@ public class Main {
         for (int i = 0; i < moves.length; i++) {
             for (int j = i + 1; j < moves.length; j++) {
                 if (i != j && moves[i].equals(moves[j])) {
-                    error = "Turns can't be same.";
+                    error = "Moves can't be same.";
                     return false;
                 }
             }
@@ -62,7 +66,7 @@ public class Main {
         return true;
     }
 
-    private static void startGame(){
+    private void startGame(){
         // Computer's move
         computerMove = getRandomNumber(1, moves.length + 1);
 
@@ -113,7 +117,7 @@ public class Main {
         System.out.println("***Next game***\n");
     }
 
-    private static void showMenu() {
+    private void showMenu() {
         System.out.println("Available moves: ");
         for (int i = 0; i < moves.length; i++) {
             System.out.printf("%2d - %s\n", i + 1, moves[i]);
@@ -123,13 +127,13 @@ public class Main {
 
     }
 
-    private static void showError() {
+    private void showError() {
         System.out.println("Error! " + error);
         System.out.println("Example of correct moves: " +
                 "rock paper scissors lizard Spock");
     }
 
-    private static void userMakesMove(){
+    private void userMakesMove(){
         System.out.print("Please, enter your move: ");
         String move = "";
         Scanner scanner = new Scanner(System.in);
