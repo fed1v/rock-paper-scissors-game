@@ -8,35 +8,29 @@ public class Table {
         this.moves = moves;
     }
 
-
     public String buildTable(){
-        String result = "";
         AsciiTable table = new AsciiTable();
 
-        String[] args = moves;
-        int numOfArgs = args.length;
+        int numOfMoves = moves.length;
 
         table.addRule();
 
-        String[] top = new String[numOfArgs + 1];
+        String[] top = new String[numOfMoves + 1];
         top[0] = "";
 
-        for(int i = 0; i < numOfArgs; i++){
-            top[i + 1] = args[i];
+        for(int i = 0; i < numOfMoves; i++){
+            top[i + 1] = moves[i];
         }
 
         table.addRow(top);
         table.addRule();
 
-        Rules rules = new Rules(args);
+        Rules rules = new Rules(moves);
 
-        rules.showTable();
-        System.out.println();
-
-        for(int i = 0; i < numOfArgs; i++){
-            String[] row = new String[numOfArgs + 1];
-            row[0] = args[i];
-            for(int j = 0; j < numOfArgs; j++){
+        for(int i = 0; i < numOfMoves; i++){
+            String[] row = new String[numOfMoves + 1];
+            row[0] = moves[i];
+            for(int j = 0; j < numOfMoves; j++){
                 if(rules.rules[i][j] == 0) row[j + 1] = "Draw";
                 else if(rules.rules[i][j] == 1) row[j + 1] = "Win";
                 else if(rules.rules[i][j] == -1) row[j + 1] = "Lose";
@@ -48,9 +42,6 @@ public class Table {
         table.getContext().setWidth(125);
         table.setTextAlignment(TextAlignment.CENTER);
 
-        result = table.render();
-
-        return result;
+        return table.render();
     }
-
 }
